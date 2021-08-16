@@ -1,0 +1,22 @@
+.productContainer{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    justify-content: center;
+    text-align: center;
+    margin-left:12rem;
+    margin-top:3.5rem;
+}
+.product{
+    margin:0.5rem;
+    box-shadow:0.3rem 0.3rem 1rem rgb(180, 180, 180);
+    border-radius:0.2rem;
+    display:flex;
+    ;
+    transition:all 0.2s ease-in-out;
+    max-width: 30rem;
+}
+
+.product:hover{
+    transform:scale(1.1);
+    
+}

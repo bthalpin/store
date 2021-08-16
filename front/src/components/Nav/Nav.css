@@ -1,0 +1,21 @@
+.navigationContainer{
+    display:flex;
+    justify-content: space-between;
+    position:fixed;
+    background:rgb(167, 166, 166);
+    padding:1rem;
+    
+    width:100%;
+}
+.navRight,.navLeft{
+    display:flex;
+}
+.navRight>div,.navLeft>div{
+    padding:0 2rem;
+}
+.sideBar{
+    width:10rem;
+    border:1px solid black;
+    position:fixed;
+    margin-top:3.4rem;
+}
