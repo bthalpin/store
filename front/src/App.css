@@ -1,3 +1,18 @@
+.main{
+  
+  /* width:90vw; */
+  /* max-height: 90vh; */
+  /* position:fixed; */
+}
 .container{
-  /* display:flex; */
+  overflow-y: scroll;
+  display:flex;
+  width:90vw;-ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.container::-webkit-scrollbar{
+  display:none;
+}
+.navContainer{
+  width:90vw;
 }

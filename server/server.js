@@ -24,13 +24,14 @@ const app = express();
 // });
 
 const products = require('./controller/products');
+const checkout = require('./controller/checkout');
 
 
 app.use(express.json())
 
 app.use(cors())
 
-console.log('data',database('products').select('*').then(data=>console.log(data)))
+// console.log('data',database('products').select('*').then(data=>console.log(data)))
 
 // console.log('db',db)
 app.get('/',(req,res)=>{
@@ -40,4 +41,5 @@ app.get('/',(req,res)=>{
     // console.log(db.select,'here')
     // products.getProduct(req,res,database)})
 app.post('/products',(req,res)=>{products.getProduct(req,res,database)})
+app.post('/checkout',(req,res)=>{checkout.checkout(req,res,database)})
 app.listen(3000,console.log('listening on port 3000'))

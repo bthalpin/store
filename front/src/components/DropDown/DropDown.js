@@ -31,7 +31,7 @@ const customStyles2 = {
   },
 };
 Modal.setAppElement('body')
-const DropDown = ({modalIsOpen,setModalIsOpen})=>{
+const DropDown = ({modalIsOpen,setModalIsOpen,setHome})=>{
     const [subIsOpen,setSubIsOpen] = useState(false);
     
     // const afterOpenModal = ()=>{
@@ -47,6 +47,10 @@ const DropDown = ({modalIsOpen,setModalIsOpen})=>{
     const closeModal = ()=>{
       setModalIsOpen(false)
     }
+    const shop = ()=>{
+      setHome(false)
+      closeModal()
+    }
     return(
         <div className = "dropDown">
          <div>
@@ -56,7 +60,7 @@ const DropDown = ({modalIsOpen,setModalIsOpen})=>{
         style={customStyles}
         ><div>
 
-          <h1>Men</h1>
+          <h1 onClick = {shop}>Men</h1>
           
           <h1>Women</h1>
           <h1>Kids</h1>

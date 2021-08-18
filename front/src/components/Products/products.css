@@ -3,20 +3,58 @@
     grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
     justify-content: center;
     text-align: center;
-    margin-left:12rem;
-    margin-top:3.5rem;
+    margin-left:1rem;
+    width:90vw;
+    margin-top:0.5rem;
+    height:60vh;
 }
 .product{
     margin:0.5rem;
-    box-shadow:0.3rem 0.3rem 1rem rgb(180, 180, 180);
+    box-shadow:0.3rem 0.3rem 0.5rem 0.1rem rgb(180, 180, 180);
     border-radius:0.2rem;
-    display:flex;
-    ;
+    /* display:flex; */
+    
     transition:all 0.2s ease-in-out;
-    max-width: 30rem;
+    max-width: 20rem;
+    padding:1rem;
 }
 
 .product:hover{
-    transform:scale(1.1);
+    transform:scale(1.05);
     
+    
+}
+.productName,.productPrice,.productDesc{
+    margin:0.1rem 0;
+}
+.productImg{
+    width:100%;
+    max-width:35vh;
+}
+.Modal{
+    position: absolute;
+    display:flex;
+    background-color: white;
+    box-shadow:0.3rem 0.3rem 0.5rem 0.5rem rgb(180, 180, 180);
+    
+    /* border:1px solid black; */
+    top: 5%;
+    left: 50%;
+    border-radius:0.2rem;
+    /* right: auto; */
+    /* bottom: auto; */
+    /* margin-right: -50%; */
+    transform: translate(-50%, 0%);
+    width:50vw;
+    max-height:70vh;
+    z-index: 99;
+}
+.Overlay{
+    z-index: 99;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.75);
 }
