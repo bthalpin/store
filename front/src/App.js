@@ -31,7 +31,10 @@ console.log(order)
   useEffect(()=>{
     fetch('http://localhost:8000/products/',{
       method:'post',
-      headers:{'Content-Type':'application/json'}
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        order:order
+      })
   }
       )
       .then(res=>res.json())
