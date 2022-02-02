@@ -1,3 +1,6 @@
+.mainDepartment{
+    height:calc(100vh - 147px);
+}
 .Departments{
     display:grid;
     grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
@@ -11,10 +14,10 @@
     /* border-radius: 50%; */
     position: relative;
     aspect-ratio: 1/1;
-    
+    cursor: pointer;
 }
 .mainAd{
-    width:98vw;
+    width:calc(100vw - 2rem);
     box-shadow: 0.1rem 0.1rem 0.5rem black;
     margin:1rem;
     border-radius: 0.2rem;
@@ -28,8 +31,9 @@
 }
 .mainadimg{
     height:100%;
-    width:100%;
+    width:calc(100vw - 2rem);
     object-fit:cover;
+    border-radius: 0.2rem;
 }
 .adimg{
     
@@ -42,11 +46,18 @@
     transform: translate(-50%,-50%);
     border-radius:50%;
 
-    /* object-fit: cover; */
+    object-fit: cover;
+}
+.departLabel{
+    position:absolute;
+    left:50%;
+    bottom:0%;
+    transform:translateX(-50%);
 }
 .Footer{
     text-align: center;
     border-top: 1px solid rgb(194, 194, 194);
+    width:100vw;
 }
 @media (max-width:600px) {
     .adimg{

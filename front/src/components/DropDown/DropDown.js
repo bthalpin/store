@@ -31,7 +31,7 @@ const customStyles2 = {
   },
 };
 Modal.setAppElement('body')
-const DropDown = ({modalIsOpen,setModalIsOpen,setHome})=>{
+const DropDown = ({modalIsOpen,setModalIsOpen,setHome,setCategory,storeDepartment})=>{
     const [subIsOpen,setSubIsOpen] = useState(false);
     
     // const afterOpenModal = ()=>{
@@ -47,8 +47,9 @@ const DropDown = ({modalIsOpen,setModalIsOpen,setHome})=>{
     const closeModal = ()=>{
       setModalIsOpen(false)
     }
-    const shop = ()=>{
-      setHome(false)
+    const shop = (department)=>{
+      setCategory(department)
+      console.log(department,'this is dep')
       closeModal()
     }
     return(
@@ -59,15 +60,20 @@ const DropDown = ({modalIsOpen,setModalIsOpen,setHome})=>{
         onRequestClose = {closeModal}
         style={customStyles}
         ><div>
-
-          <h1 onClick = {shop}>Men</h1>
+          <ul>
+            
+          {storeDepartment?.map((dep)=>{
+            return <li onClick={()=>shop(dep.name)}>{dep.name}</li>
+          })}
+          </ul>
+          {/* <h1 onClick = {()=>shop('Men Suit')}>Men</h1>
           
           <h1>Women</h1>
           <h1>Kids</h1>
           <h1>Baby</h1>
           <h1>Shoes</h1>
           <h1>Jewelry</h1>
-          <h1>Sale</h1>
+          <h1>Sale</h1> */}
        
           </div>
           <button onClick = {closeModal}>Close</button>

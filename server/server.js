@@ -25,6 +25,7 @@ const app = express();
 
 const products = require('./controller/products');
 const checkout = require('./controller/checkout');
+const departments = require('./controller/departments');
 
 
 app.use(express.json())
@@ -40,6 +41,7 @@ app.get('/',(req,res)=>{
 // app.post('/products',(req,res)=>{
     // console.log(db.select,'here')
     // products.getProduct(req,res,database)})
+app.get('/departments',(req,res)=>{departments.getDepartments(req,res,database)})
 app.post('/products',(req,res)=>{products.getProduct(req,res,database)})
 app.post('/checkout',(req,res)=>{checkout.checkout(req,res,database)})
-app.listen(3000,console.log('listening on port 3000'))
+app.listen(8000,console.log('listening on port 8000'))

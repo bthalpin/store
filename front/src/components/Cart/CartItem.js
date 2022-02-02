@@ -3,9 +3,10 @@ import './Cart.css';
 
 const CartItem = ({item,removeFromCart,setQuantity,i,quantity})=>{
     const quantityUpdate = (event) =>{
+        
         const tempQuantity = quantity
-        tempQuantity[i]=parseInt(event.target.value)
-        setQuantity([...tempQuantity])
+        tempQuantity[item.id]=parseInt(event.target.value)
+        setQuantity({...tempQuantity})
         console.log(quantity)
     
     }
@@ -21,7 +22,7 @@ const CartItem = ({item,removeFromCart,setQuantity,i,quantity})=>{
             {'$'+parseFloat(item.price).toFixed(2)}
         </div>
         <div>
-            <input onInput={quantityUpdate} type="number" min='1'  value={quantity[i]}></input>
+            <input onInput={quantityUpdate} type="number" min='1' max={item.quantity} value={quantity[item.id]}></input>
             {/* <select onInput={quantityUpdate}>
                 <option value = '1'>1</option>
                 <option value = '2'>2</option>

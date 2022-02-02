@@ -3,18 +3,23 @@ import './Nav.css';
 import logo512 from '../../images/logo512.png';
 import cart from '../../images/cart.png';
 
-const Nav = ({openModal,filter,setFilter,setCartIsOpen,checkout,setHome,setCategory,total,quantity}) => {
+const Nav = ({openModal,filter,setFilter,setCartIsOpen,checkout,setHome,setCategory,total,quantity,category,totalItems}) => {
     const search = (event)=>{
-        setHome(false)
+        if (category==='home'){
+
+            setCategory('all')
+        }
+        // setHome(false)
 setFilter(event.target.value)
 console.log(event)
     }
+    
     const closeCart = () =>{
         setCartIsOpen(true)
     }
     const goHome =()=>{
-        setCategory('all')
-        setHome(true)
+        setCategory('home')
+        // setHome(true)
     }
     return (
         <div className = "navigationContainer">
@@ -35,9 +40,8 @@ console.log(event)
                 </div>
                 <div className = "cartContainer" onClick = {closeCart}>
                     <img src = {cart} alt = 'Cart' width = "40rem"></img>
-                    <div className = "itemCount">{quantity.reduce((acc,item)=>{
-                        return acc+=item
-                    },0)}</div>
+                    <div className = "itemCount">{totalItems}</div>
+                   
                     <div className = "cartTotal">{'$'+parseFloat(total).toFixed(2)}</div>
                 </div>
                 

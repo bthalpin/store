@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Product from './Product';
-
+import close from '../../images/delete.png';
 import Modal from 'react-modal';
 import './products.css';
 
@@ -23,62 +23,82 @@ const customStyle = {
 }
 const Products = ({products,filtered,setCheckout,checkout,removeFromCart,quantity,setQuantity}) => {
     
-const [productInfo,setProductInfo] = useState([])
-const [productCard,setProductCard] = useState(false)
+    const [productInfo,setProductInfo] = useState([])
+    const [productCard,setProductCard] = useState(false)
 
-const openInfo = (info)=>{
-    setProductInfo(info)
-    setProductCard(true)
-    
+    const openInfo = (info)=>{
+        setProductInfo(info)
+        setProductCard(true)
+        
     }
     
     const closeInfo=()=>{
         setProductCard(false)
     console.log('close')
     }
-    const addToCart = (item) =>{        
+    const addToCart = (item) =>{     
+        let id = item.id   
         setCheckout(prevCheckout=>{
             return [...prevCheckout,item]
         })
+        // setQuantity(prevQuantity=>{
+        //     return [...prevQuantity,1]
+        // })
         setQuantity(prevQuantity=>{
-            return [...prevQuantity,1]
+            return {...prevQuantity,[id]:1}
         })
         console.log(quantity)
     }
+    
     return (
-        <div className = "productContainer">
-            {filtered.map((item)=>{
-                return <Product item = {item} setProductInfo = {setProductInfo} productInfo = {productInfo} openInfo = {openInfo} addToCart = {addToCart}/>
-            })}
-            <Modal
-        isOpen = {productCard}
-        className = 'Modal'
-        overlayClassName = 'Overlay'
-        onRequestClose = {closeInfo}
+        <div>
+            <div className = "productContainer">
+                {filtered.map((item)=>{
+                    return <Product item = {item} setProductInfo = {setProductInfo} productInfo = {productInfo} openInfo = {openInfo} addToCart = {addToCart}/>
+                })}
+                <Modal
+                    isOpen = {productCard}
+                    className = 'Modal'
+                    overlayClassName = 'Overlay'
+                    onRequestClose = {closeInfo}
         // style={customStyle}
         >
             {/* <div> */}
-<div>
-<h1 className = "productName">{productInfo.name}</h1>
-            <p className = "productDesc">{productInfo.description}</p>
-            <p className = "productPrice">${parseFloat(productInfo.price).toFixed(2)}</p>
+                    <div className = "productInfo">
+                        <h1 className = "productName">{productInfo.name}</h1>
+                        <p className = "productDesc">{productInfo.description}</p>
+                        <p className = "productPrice">${parseFloat(productInfo.price).toFixed(2)}</p>
             
-</div>
-<div>
+                    </div>
+                    <div>
 
-<img className  = "productImg" src = {productInfo.url} alt="oops" ></img>
-</div>
-            {checkout.includes(productInfo)?
-            <p>In cart
-            <button onClick={()=>removeFromCart(productInfo)} >Remove</button>
-            </p>
-            :
-            <button onClick = {()=>addToCart(productInfo)}>Add to Cart</button>
-         
-            }
+                        <img className  = "productImg" src = {productInfo.url} alt="oops" ></img>
+                        {console.log('before load',checkout,productInfo,checkout.includes(productInfo))}
+                        {productInfo.quantity===0?<p>OUT OF STOCK</p>:
+                            checkout.find(item=>item.id===productInfo.id)?
+                                <div>In cart
+                                        
+                                    {console.log(checkout,productInfo,'addremove')}
+                                    <button className = "modalButton" onClick={()=>removeFromCart(productInfo)} >Remove</button>
+                                </div>
+                                    :
+                                    <button className = "modalButton" onClick = {()=>addToCart(productInfo)}>Add to Cart</button>
+                                
+                                }
+                    </div>
+                    <div className = "close">
+                        <img className = "closeButton" src = {close} alt = "close" onClick = {closeInfo}/>
+                            
+                                    
+                    </div>
+
              {/* </div> */}
-          <button onClick = {closeInfo}>Close</button>
-        </Modal>
+                </Modal>
+        
+                <div className = "">
+                </div>
+        
+            </div>
         </div>
     )
 }

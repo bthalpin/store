@@ -1,5 +1,6 @@
 .main{
-  
+  /* display:flex; */
+  /* justify-content: center; */
   /* width:90vw; */
   /* max-height: 90vh; */
   /* position:fixed; */
@@ -7,7 +8,8 @@
 .container{
   overflow-y: scroll;
   display:flex;
-  width:90vw;-ms-overflow-style: none;
+  width:100vw;
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .container::-webkit-scrollbar{

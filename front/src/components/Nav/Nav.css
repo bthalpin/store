@@ -1,9 +1,14 @@
+.navContainer{
+    /* position:fixed;
+    top:0;
+    z-index: 999; */
+}
 .navigationContainer{
     display:flex;
     justify-content: space-between;
     /* top:0; */
     /* background:rgb(167, 166, 166); */
-    padding:1vw;
+    padding:1rem;
     /* box-shadow: 0.2rem 0.2rem 0.3rem grey; */
     width:97vw;
     /* position:fixed; */

@@ -32,23 +32,26 @@ const customStyles2 = {
 };
 
 
-const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quantity,setQuantity,total,setTotal})=>{
-   
+const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quantity,setQuantity,total,setTotal,setTotalItems})=>{
+    
     useEffect(()=>{
         let i=-1;
         setTotal(checkout.reduce((acc,item)=>{
-            i++
-            console.log(i,quantity[i])
-            let x=parseFloat(item.price)*quantity[i]
-            console.log(quantity[i],x,'here')
+            // i++
+            // console.log(i,quantity[i])
+            let x=parseFloat(item.price)*quantity[item.id]
+            // console.log(quantity[i],x,'here')
             return acc+= x           
+        },0))
+        setTotalItems(checkout.reduce((acc,item)=>{
+          return acc+=quantity[item.id]
         },0))
     },[checkout,quantity])
     const closeCart = ()=>{
       setCartIsOpen(false)
     }
     const checkOut = () =>{
-        fetch('http://localhost:3000/checkout',{
+        fetch('http://localhost:8000/checkout/',{
             method:'post',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({
@@ -59,6 +62,7 @@ const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quan
           .then(res=>res.json())
           .then()
           .catch(err=>console.log(err))
+          console.log(quantity)
     }
     let inCart = [];
     return(
