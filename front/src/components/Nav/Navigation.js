@@ -5,13 +5,13 @@ const Navigation = ({openModal,sort,category,home}) => {
     return (
         <div className = "subNav">
             <div className = "location">
-            {category==='all'||category=='home'?<p> </p>:
+            {category==='all'||category==='home'?<p> </p>:
             
             <p>{category}</p>
             }
             
             </div>
-            {home?
+            {category==='home'?
             <></>
             :
             <div className = "filter">
