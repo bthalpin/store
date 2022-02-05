@@ -12,9 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^15.0.1",
     "express": "^4.17.1",
     "knex": "^0.21.21",
+    "nodemailer": "^6.7.2",
     "nodemon": "^2.0.12",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "stripe": "^8.201.0"
   }
 }

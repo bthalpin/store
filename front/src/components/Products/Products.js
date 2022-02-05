@@ -21,7 +21,7 @@ const customStyle = {
         maxHeight:'70vh'
       },
 }
-const Products = ({products,filtered,setCheckout,checkout,removeFromCart,quantity,setQuantity}) => {
+const Products = ({products,filtered,setCheckout,checkout,removeFromCart,quantity,setQuantity,setCartIsOpen}) => {
     
     const [productInfo,setProductInfo] = useState([])
     const [productCard,setProductCard] = useState(false)
@@ -49,6 +49,10 @@ const Products = ({products,filtered,setCheckout,checkout,removeFromCart,quantit
         })
         console.log(quantity)
     }
+    const openCart = () =>{
+        setCartIsOpen(true)
+        setProductCard(false)
+    }
     
     return (
         <div>
@@ -74,12 +78,13 @@ const Products = ({products,filtered,setCheckout,checkout,removeFromCart,quantit
 
                         <img className  = "productImg" src = {productInfo.url} alt="oops" ></img>
                         {console.log('before load',checkout,productInfo,checkout.includes(productInfo))}
-                        {productInfo.quantity===0?<p>OUT OF STOCK</p>:
+                        {productInfo.quantity<=0?<p>OUT OF STOCK</p>:
                             checkout.find(item=>item.id===productInfo.id)?
                                 <div>In cart
                                         
                                     {console.log(checkout,productInfo,'addremove')}
                                     <button className = "modalButton" onClick={()=>removeFromCart(productInfo)} >Remove</button>
+                                    <button className = "modalButton" onClick={openCart} >Check Out</button>
                                 </div>
                                     :
                                     <button className = "modalButton" onClick = {()=>addToCart(productInfo)}>Add to Cart</button>

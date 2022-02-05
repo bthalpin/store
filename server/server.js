@@ -1,5 +1,5 @@
 const express = require('express');
-
+const path = require('path');
 const cors = require('cors');
 const knex = require('knex');
 
@@ -12,6 +12,7 @@ const database = knex({
         database: 'store'
     }});
 const app = express();
+
 
 // const db = knex({
 //     client:'pg',
@@ -26,8 +27,7 @@ const app = express();
 const products = require('./controller/products');
 const checkout = require('./controller/checkout');
 const departments = require('./controller/departments');
-
-
+const payment = require('./controller/payment');
 app.use(express.json())
 
 app.use(cors())
@@ -36,7 +36,10 @@ app.use(cors())
 
 // console.log('db',db)
 app.get('/',(req,res)=>{
-    res.send('working')
+    res.sendFile(path.join(__dirname,'./server.html'))
+})
+app.get('/server.css',(req,res)=>{
+    res.sendFile(path.join(__dirname,'./server.css'))
 })
 // app.post('/products',(req,res)=>{
     // console.log(db.select,'here')
@@ -44,4 +47,5 @@ app.get('/',(req,res)=>{
 app.get('/departments',(req,res)=>{departments.getDepartments(req,res,database)})
 app.post('/products',(req,res)=>{products.getProduct(req,res,database)})
 app.post('/checkout',(req,res)=>{checkout.checkout(req,res,database)})
+app.post('/payment',(req,res)=>{payment.makePayment(req,res,database)})
 app.listen(8000,console.log('listening on port 8000'))

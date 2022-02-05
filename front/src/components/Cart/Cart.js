@@ -32,7 +32,7 @@ const customStyles2 = {
 };
 
 
-const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quantity,setQuantity,total,setTotal,setTotalItems})=>{
+const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quantity,setQuantity,total,setTotal,setTotalItems,setPayment})=>{
     
     useEffect(()=>{
         let i=-1;
@@ -51,18 +51,9 @@ const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quan
       setCartIsOpen(false)
     }
     const checkOut = () =>{
-        fetch('http://localhost:8000/checkout/',{
-            method:'post',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({
-              checkout:checkout,
-              quantity:quantity
-            })
-          })
-          .then(res=>res.json())
-          .then()
-          .catch(err=>console.log(err))
-          console.log(quantity)
+        
+          setCartIsOpen(false)
+          setPayment(true)
     }
     let inCart = [];
     return(
@@ -75,6 +66,7 @@ const Cart = ({cartIsOpen,setCartIsOpen,checkout,setCheckout,removeFromCart,quan
         overlayClassName = 'CartOverlay'
         ><div className = "shoppingCart">
             {checkout.length===0?<h1>Shopping cart is empty</h1>:<></>}
+            {console.log(checkout,'check')}
           {checkout.map((item,i)=>{
               if (!inCart.includes(item)){
                 inCart.push(item)

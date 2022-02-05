@@ -7,6 +7,7 @@ import Products from './components/Products/Products';
 import NavLeft from './components/Nav/NavLeft';
 import Cart from './components/Cart/Cart';
 import Departments from './components/Departments/Departments';
+import CheckoutCart from './components/Checkout/CheckoutCart';
 import './App.css';
 
 Modal.setAppElement('body')
@@ -25,6 +26,8 @@ function App() {
   const [storeDepartment,setStoreDepartment] = useState([])
   const [totalItems,setTotalItems] = useState()
   const [quantity,setQuantity] = useState({})
+  const [payment,setPayment] = useState(false);
+  const [success,setSuccess] = useState(false);
   
 
 console.log(order)
@@ -66,6 +69,52 @@ console.log(order)
       })
       .catch(err=>console.log(err))
   },[])
+  useEffect(()=>{
+    // setQuantity(window.localStorage.getItem(JSON.parse('quantity')))
+    // setCheckout(window.localStorage.getItem(JSON.parse('checkout')))
+    const initialQuantity = window.localStorage.getItem(('quantity'))
+    const initialCheckout = window.localStorage.getItem(('checkout'))
+    // initialQuantity.map(JSON.parse)
+    // initialCheckout.map(JSON.parse)
+    const loadedQuantity =JSON.parse(initialQuantity);
+    const loadedCheckout = JSON.parse(initialCheckout)
+    
+    setCheckout(loadedCheckout)
+    setQuantity(loadedQuantity)
+    
+    console.log(initialCheckout,initialQuantity,loadedQuantity,loadedCheckout)
+    // console.log(window.localStorage.getItem(JSON.parse('checkout')))
+  //   const checkUserData = ()=>{
+  //     const initialCheckout = localStorage.getItem('checkout')
+  //     const initialQuantity = localStorage.getItem('quantity')
+  //     console.log(initialCheckout,initialQuantity,'initial')
+  //     if (initialCheckout){
+  //       setCheckout(initialCheckout);
+    
+  //     }
+  //     if(initialQuantity){
+  //       setQuantity(initialQuantity);
+  
+  //     }
+  //     window.addEventListener('storage',checkUserData,false)
+  //     return ()=>{
+  //       window.removeEventListener('storage',checkUserData)
+  //     }
+  //   }
+  //   return ()=>{
+
+  // }
+},[])
+
+  useEffect(()=>{
+    window.localStorage.setItem('checkout',JSON.stringify(checkout));
+  },[checkout])
+
+  useEffect(()=>{
+    window.localStorage.setItem('quantity',JSON.stringify(quantity));
+  },[quantity])
+
+  
 
   const openModal = ()=>{
     setModalIsOpen(true)
@@ -85,6 +134,9 @@ console.log(order)
     console.log('i',i)
 }
 
+const closeSuccess = () =>{
+  setSuccess(false)
+}
   
   // console.log(checkout)
   return (
@@ -94,21 +146,37 @@ console.log(order)
       <Nav openModal = {openModal} filter = {filter} setFilter = {setFilter} setCartIsOpen = {setCartIsOpen} checkout = {checkout} setHome = {setHome} setCategory = {setCategory} total = {total} quantity = {quantity} category = {category} totalItems = {totalItems}/>
       
     <Navigation sort = {sort} category = {category} home = {home}/>
-      </div>
-      {category==='home'?
+    <Modal
+                    isOpen = {success}
+                    className = 'Modal'
+                    overlayClassName = 'Overlay'
+                    onRequestClose = {closeSuccess}
+        >
+            
+                    <div className = "">
+                          <h1>Payment Successful!</h1>
+                          <p>A confirmation email will be sent shortly.  Thank you for your purchase.</p>
+                    </div>
+
+                </Modal>
+    </div>
+      {payment?
+      <CheckoutCart total={total} setPayment = {setPayment} setCheckout={setCheckout} success={success} setSuccess={setSuccess} checkout={checkout} quantity = {quantity} />
+      :
+      category==='home'?
       <div className = "container">
       <Departments setHome = {setHome} setCategory = {setCategory} storeDepartment = {storeDepartment}/>
       <DropDown storeDepartment = {storeDepartment} setCategory = {setCategory} modalIsOpen = {modalIsOpen} setModalIsOpen = {setModalIsOpen} setHome = {setHome}/>
-      <Cart cartIsOpen = {cartIsOpen} setCartIsOpen = {setCartIsOpen} checkout = {checkout} setCheckout = {setCheckout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity} total = {total} setTotal = {setTotal} setTotalItems = {setTotalItems}/>
+      <Cart cartIsOpen = {cartIsOpen} setCartIsOpen = {setCartIsOpen} checkout = {checkout} setCheckout = {setCheckout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity} total = {total} setTotal = {setTotal} setTotalItems = {setTotalItems} setPayment = {setPayment} />
       </div>
       :
     <div className = "container">
 
     <NavLeft setCategory = {setCategory} storeDepartment = {storeDepartment} />
     {console.log(storeDepartment)}
-    <Cart cartIsOpen = {cartIsOpen} setCartIsOpen = {setCartIsOpen} checkout = {checkout} setCheckout = {setCheckout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity} total = {total} setTotal = {setTotal} setTotalItems = {setTotalItems}/>
+    <Cart cartIsOpen = {cartIsOpen} setCartIsOpen = {setCartIsOpen} checkout = {checkout} setCheckout = {setCheckout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity} total = {total} setTotal = {setTotal} setTotalItems = {setTotalItems} setPayment = {setPayment} />
     <DropDown storeDepartment = {storeDepartment} setCategory = {setCategory} modalIsOpen = {modalIsOpen} setModalIsOpen = {setModalIsOpen} setHome = {setHome}/>
-      <Products products = {products} filtered = {filtered} setCheckout = {setCheckout} checkout = {checkout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity}/>
+      <Products products = {products} filtered = {filtered} setCheckout = {setCheckout} checkout = {checkout} removeFromCart = {removeFromCart} quantity = {quantity} setQuantity = {setQuantity} setCartIsOpen = {setCartIsOpen} />
    {console.log('quantity',quantity)}
     </div>
     }

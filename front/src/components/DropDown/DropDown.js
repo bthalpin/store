@@ -81,7 +81,7 @@ const DropDown = ({modalIsOpen,setModalIsOpen,setHome,setCategory,storeDepartmen
          </div>
          
          <div>
-         {/* <Sub customStyles2 = {customStyles2} subIsOpen = {subIsOpen} setSubIsOpen = {setSubIsOpen} closeSub = {closeSub}/> */}
+         <Sub customStyles2 = {customStyles2} subIsOpen = {subIsOpen} setSubIsOpen = {setSubIsOpen} closeSub = {closeSub}/>
        
          </div>
         
