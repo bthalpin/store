@@ -14,9 +14,12 @@ const Product = ({item,productInfo,setProductInfo,openInfo,addToCart}) => {
             {console.log('localhost:8000/static/images/'+url,'url')}
             <p>{description}</p>
             <p className = "productPrice" >${parseFloat(price).toFixed(2)}</p>
-            {quantity?
+            {quantity>0&&quantity<10?
             
-            <p>{quantity}</p>
+            <p>Only {quantity} Left</p>
+            :
+            quantity>0?
+            <></>
             :
             <p>Out of Stock</p>
             }
