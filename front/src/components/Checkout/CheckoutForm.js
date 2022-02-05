@@ -33,7 +33,7 @@ const CheckoutForm = ({total,setPayment,setCheckout,success,setSuccess,checkout,
             try{
                 const { id } = paymentMethod
                 console.log(e.target[1].value,e.target[2].value,e.target[3].value,checkout)
-                const response = await axios.post('http://localhost:8000/payment',{
+                const response = await axios.post('https://halpin-store/heroku.com/payment',{
                     amount: stripeTotal,
                     id:id,
                     first:e.target[1].value,

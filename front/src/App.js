@@ -32,7 +32,7 @@ function App() {
 
 console.log(order)
   useEffect(()=>{
-    fetch('http://localhost:8000/products/',{
+    fetch('https://halpin-store/heroku.com/products/',{
       method:'post',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -58,7 +58,7 @@ console.log(order)
   },[filter,products,category,storeDepartment])
 
   useEffect(()=>{
-    fetch('http://localhost:8000/departments/',{
+    fetch('https://halpin-store/heroku.com/departments/',{
       method:'get',
       headers:{'Content-Type':'application/json'}
     }
